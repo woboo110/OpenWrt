@@ -25,15 +25,15 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: ARMv8/lede-gcc11.config
+  CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-  FILE_NAME: ARMv8_ROOTFS
-  PRODUCT_NAME: ARMv8_ROOTFS
+  FILE_NAME: N1_ROOTFS
+  PRODUCT_NAME: N1_ROOTFS
 
 jobs:
   build:
@@ -176,14 +176,4 @@ jobs:
         delete_tag_pattern:
         delete_tags: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Telegram notification
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          编译时间：${{ env.DATE }}
-          更新信息：${{ env.useVersionInfo }}
-          ${{ env.PRODUCT_NAME }} 编译完成
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
